@@ -38,15 +38,20 @@ async function getPostById(id) {
     return await PostModel.findById(id).populate('categoryId', 'name').populate('createdById', 'username');
 }
 
-async function getMyPosts(userId, categoryId) {
+async function getMyPosts(userId, bodyWords, categoryId) {
     let query = {
         createdById: userId
     }
 
-    if (categoryId) {
-        validateObjectId(categoryId)
-        query.categoryId = categoryId;
+    if (bodyWords != 'undefined') {
+        query.body = {
+            $regex: new RegExp(bodyWords, "i")
+        };
     }
+    // if (categoryId != 'undefined') {
+    //     validateObjectId(categoryId)
+    //     query.categoryId = categoryId;
+    // }
 
     return await PostModel.find(query).populate('categoryId', 'name');
 }

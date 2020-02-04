@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
 router.get('/my-posts', authenticationMiddleware, async (req, res, next) => {
     try {
 
-        const posts = await postService.getMyPosts(req.user._id, req.query.categoryId);
+        const posts = await postService.getMyPosts(req.user._id, req.query.bodyWords,req.query.categoryId);
 
         return res.status(200).send(posts);
     } catch (e) {
