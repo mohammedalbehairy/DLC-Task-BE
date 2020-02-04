@@ -4,8 +4,7 @@ const userService = require('./user_service');
 // get users
 router.get('/', async (req, res, next) => {
     try {
-
-        const users = await userService.getUsers(req.query.username);
+        users = await userService.getUsers(req.query.email);
 
         return res.status(200).send(users);
     } catch (e) {

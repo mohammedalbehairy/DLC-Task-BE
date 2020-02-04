@@ -6,12 +6,12 @@ const {
 } = require('./user_model')
 
 
-async function getUsers(username) {
+async function getUsers(email) {
     let query = {};
 
-    if (username) {
-        query.username = {
-            $regex: new RegExp(username, "i")
+    if (email != 'undefined') {
+        query.email = {
+            $regex: new RegExp(email, "i")
         };
     }
 
